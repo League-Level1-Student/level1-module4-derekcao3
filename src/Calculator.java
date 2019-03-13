@@ -18,7 +18,7 @@ public class Calculator implements MouseListener {
 	JTextField textField;
 	JTextField textField2;
 	JLabel label;
-	int answer;
+	double answer;
 
 	public void createUI() {
 		JFrame frame = new JFrame();
@@ -51,24 +51,36 @@ public class Calculator implements MouseListener {
 		label.setText("");
 		panel3.add(label);
 		add.addMouseListener(this);
+		subtract.addMouseListener(this);
+		multiply.addMouseListener(this);
+		divide.addMouseListener(this);
 		frame.pack();
 
 	}
-
-	public static void main(String[] args) {
-		Calculator calculator = new Calculator();
-		calculator.createUI();
-	}
+	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		String text = textField.getText();
-		int number1 = Integer.parseInt(text);
+		double number1 = Double.parseDouble(text);
 		String text2 = textField2.getText();
-		int number2 = Integer.parseInt(text2);
+		double number2 = Double.parseDouble(text2);
 		if (e.getSource().equals(add)) {
 			answer = number1 + number2;
+			label.setText(answer + "");
+		}
+		if (e.getSource().equals(subtract)) {
+			answer = number1 - number2;
+			label.setText(answer + "");
+
+		}
+		if (e.getSource().equals(multiply)) {
+			answer = number1 * number2;
+			label.setText(answer + "");
+		}
+		if (e.getSource().equals(divide)) {
+			answer = number1 / number2;
 			label.setText(answer + "");
 		}
 	}
