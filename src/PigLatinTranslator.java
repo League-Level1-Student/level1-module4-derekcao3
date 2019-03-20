@@ -4,10 +4,15 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class PigLatinTranslator implements MouseListener{
+public class PigLatinTranslator implements MouseListener {
+	JFrame frame;
+	JTextField textField;
+	JTextField textField2;
+
 	/**
 	 * Method to test whether a character is a letter or not.
 	 * 
@@ -82,18 +87,19 @@ public class PigLatinTranslator implements MouseListener{
 	}
 
 	public void CreteUI() {
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setVisible(true);
 		frame.setTitle("Pig Latin Translator");
 		JPanel panel = new JPanel();
 		frame.add(panel);
-		JTextField textField = new JTextField("", 20);
+		textField = new JTextField("", 20);
 		panel.add(textField);
 		JButton button = new JButton();
 		button.setText("translate");
 		panel.add(button);
-		JTextField textField2 = new JTextField("", 20);
+		textField2 = new JTextField("", 20);
 		panel.add(textField2);
+		button.addMouseListener(this);
 		frame.pack();
 	}
 
@@ -105,30 +111,33 @@ public class PigLatinTranslator implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		String text = textField.getText();
+		String pig = translate(text);
+		textField2.setText(pig);
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
