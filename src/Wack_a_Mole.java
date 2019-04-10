@@ -3,11 +3,13 @@ import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Date;
 import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Wack_a_Mole implements MouseListener {
@@ -16,6 +18,7 @@ public class Wack_a_Mole implements MouseListener {
 	JButton button;
 	JLabel label;
 	String mole = "mole!";
+	Date timeAtStart;
 
 	public void drawButtons(int buttons) {
 		panel.removeAll();
@@ -49,24 +52,38 @@ public class Wack_a_Mole implements MouseListener {
 		frame.add(panel2, BorderLayout.SOUTH);
 		panel2.add(label);
 		drawButtons(24);
+		timeAtStart = new Date();
+		timeAtStart.getTime();
 	}
 
 	public static void main(String[] args) {
 		Wack_a_Mole UI = new Wack_a_Mole();
 		UI.CreateUI();
+		
+	}
+	
+	private void endGame(Date timeAtStart, int molesWhacked) {
+	     Date timeAtEnd = new Date();
+	     JOptionPane.showMessageDialog(null, "Your whack rate is "
+	          + ((timeAtEnd.getTime() - timeAtStart.getTime()) / 1000.00 / molesWhacked)
+	          + " moles per second.");
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (button.getText() == mole) {
-			label.setText("hit");
-		}
-		else {
-			label.setText("miss");
-		}
+		for (int i = 0; i < 10; i++) {
 
-		drawButtons(24);
+			JButton b = (JButton) e.getSource();
+			if (b.getText().equals("mole!")) {
+				label.setText("hit!");
+			} else {
+				label.setText("miss");
+			}
+			
+			drawButtons(24);
+		}
+		endGame(timeAtStart,10);
 	}
 
 	@Override
